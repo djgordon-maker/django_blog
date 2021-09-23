@@ -9,7 +9,7 @@
 <div class="post-body">
 	{{ post.text }}
 </div>
-<u1 class="categories">
+<ul class="categories">
 	{% for category in post.categories.all %}
 		<li>{{ category }}</li>
 	{% endfor %}

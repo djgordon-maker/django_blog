@@ -46,7 +46,7 @@ class FrontEndTestCase(TestCase):
         resp_text = resp.content.decode(resp.charset)
         self.assertTrue("Recent Posts" in resp_text)
         for count in range(1, 11):
-            title = f"Post {count} Title"
+            title = 'Post %d Title' % count
             if count < 6:
                 self.assertContains(resp, title, count=1)
             else:
@@ -54,9 +54,9 @@ class FrontEndTestCase(TestCase):
 
     def test_details_only_published(self):
         for count in range(1, 11):
-            title = f'Post {count} Title'
+            title = 'Post %d Title' % count
             post = Post.objects.get(title=title)
-            resp = self.client.get(f'/posts/{post.pk}/')
+            resp = self.client.get('/posts/%d/' % post.pk)
             if count < 6:
                 self.assertEqual(resp.status_code, 200)
                 self.assertContains(resp, title)
