@@ -17,6 +17,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 ALLOWED_HOSTS = ["*"]
 
 MIDDLEWARE = (
-    "whitenoise.middleware.whileNoiseMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     *MIDDLEWARE,
 )
