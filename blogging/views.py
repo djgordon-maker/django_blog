@@ -3,15 +3,22 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import loader
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from rest_framework import viewsets
+from rest_framework import permissions
+from blogging.models import User, Post, Catagory
+from blogging.serializers import UserSerializer
 
-from blogging.models import Post
+
+class UserViewSet(viewsets.ModelViewSet):
+    '''
+    API endpoint for User
+    '''
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-def list_view(request):
-    published = Post.objects.exclude(published_date__exact=None)
-    posts = published.order_by("-published_date")
-    context = {"posts": posts}
-    return render(request, "blogging/list.html", context)
+# class PostViewSet(viewsets.ModelViewSet):
 
 
 class BlogListView(ListView):

@@ -18,4 +18,3 @@ class CatagorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Catagory
         fields = ['name', 'description', 'posts']
-
